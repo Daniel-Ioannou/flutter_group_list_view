@@ -9,7 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  group_listview:
+  group_list_view:
     path: ../
 
 dev_dependencies:
