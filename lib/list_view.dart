@@ -8,14 +8,14 @@ typedef SectionWidgetBuilder = Widget Function(BuildContext context, int section
 class GroupListView extends StatefulWidget {
   final int sectionsCount;
   final ItemWidgetBuilder itemBuilder;
-  final SectionWidgetBuilder groupTitleBuilder;
+  final SectionWidgetBuilder groupHeaderBuilder;
   final int Function(int section) countOfItemInSection;
 
   const GroupListView({
     Key key,
     @required this.itemBuilder,
     @required this.sectionsCount,
-    @required this.groupTitleBuilder,
+    @required this.groupHeaderBuilder,
     @required this.countOfItemInSection,
   }) : super(key: key);
 
@@ -37,7 +37,7 @@ class _GroupListViewState extends State<GroupListView> {
         IndexPath indexPath = _getIndexPath(index);
         if (indexPath.index != null)
           return widget.itemBuilder(context, indexPath);
-        return widget.groupTitleBuilder(context, indexPath.section);
+        return widget.groupHeaderBuilder(context, indexPath.section);
       },
     );
   }
