@@ -2,6 +2,8 @@
 
 A List with Headers like iOS UITableView section.
 
+<img src="https://raw.githubusercontent.com/Daniel-Ioannou/flutter_group_list_view/master/assets/ReadMe%20%20Screenshot.png" width="300"> 
+
 ## Getting Started
 
  Add the package to your pubspec.yaml:
