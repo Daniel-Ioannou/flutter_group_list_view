@@ -70,6 +70,7 @@ class MyApp extends StatelessWidget {
             _elements.values.toList()[index.section][index.index],
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
           ),
+          trailing: Icon(Icons.arrow_forward_ios),
         ),
       ),
     );
