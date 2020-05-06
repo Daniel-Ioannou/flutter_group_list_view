@@ -1,16 +1,38 @@
-# group_listview
+# Example application for GroupListView.
 
-Example application for GroupListView 
+GroupListView is a List with Headers like iOS UITableView section.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+ Add the package to your pubspec.yaml:
 
-A few resources to get you started if this is your first Flutter project:
+ ```yaml
+ group_list_view: ^1.0.0
+ ```
+ 
+ In your dart file, import the library:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ ```Dart
+import 'package:group_list_view/group_list_view.dart';
+ ``` 
+ 
+ Instead of using a `ListView` create a `GroupListView` Widget:
+ 
+ ```Dart
+  GroupListView(
+    sectionsCount: _elements.keys.toList().length,
+    countOfItemInSection: (int section) {
+      return _elements.values.toList()[section].length;
+    },
+    itemBuilder: _itemBuilder,
+    groupHeaderBuilder: (BuildContext context, int section) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+        child: Text(
+          _elements.keys.toList()[section],
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+      );
+    },
+  ),
+```
