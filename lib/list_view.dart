@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'index_path.dart';
@@ -11,12 +12,42 @@ class GroupListView extends StatefulWidget {
   final SectionWidgetBuilder groupHeaderBuilder;
   final int Function(int section) countOfItemInSection;
 
+  //Fields from ListView.builder constructor
+  final Axis scrollDirection;
+  final bool reverse;
+  final ScrollController controller;
+  final bool primary;
+  final ScrollPhysics physics;
+  final bool shrinkWrap;
+  final EdgeInsetsGeometry padding;
+  final double itemExtent;
+  final bool addAutomaticKeepAlives;
+  final bool addRepaintBoundaries;
+  final bool addSemanticIndexes;
+  final double cacheExtent;
+  final int semanticChildCount;
+  final DragStartBehavior dragStartBehavior;
+
   const GroupListView({
     Key key,
     @required this.itemBuilder,
     @required this.sectionsCount,
     @required this.groupHeaderBuilder,
     @required this.countOfItemInSection,
+    this.scrollDirection = Axis.vertical,
+    this.reverse = false,
+    this.controller,
+    this.primary,
+    this.physics,
+    this.shrinkWrap = false,
+    this.padding,
+    this.itemExtent,
+    this.addAutomaticKeepAlives = true,
+    this.addRepaintBoundaries = true,
+    this.addSemanticIndexes = true,
+    this.cacheExtent,
+    this.semanticChildCount,
+    this.dragStartBehavior = DragStartBehavior.start,
   }) : super(key: key);
 
   @override
@@ -32,6 +63,20 @@ class _GroupListViewState extends State<GroupListView> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      scrollDirection: widget.scrollDirection,
+      reverse: widget.reverse,
+      controller: widget.controller,
+      primary: widget.primary,
+      physics: widget.physics,
+      shrinkWrap: widget.shrinkWrap,
+      padding: widget.padding,
+      itemExtent: widget.itemExtent,
+      addAutomaticKeepAlives: widget.addAutomaticKeepAlives,
+      addRepaintBoundaries: widget.addRepaintBoundaries,
+      addSemanticIndexes: widget.addSemanticIndexes,
+      cacheExtent: widget.cacheExtent,
+      semanticChildCount: widget.semanticChildCount,
+      dragStartBehavior: widget.dragStartBehavior,
       itemCount: _itemCount,
       itemBuilder: (BuildContext context, int index) {
         IndexPath indexPath = _getIndexPath(index);
