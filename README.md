@@ -1,4 +1,4 @@
-# GroupListView package for Flutter. (Developers Preview)
+# GroupListView package for Flutter.
 
 [![pub package](https://img.shields.io/pub/v/group_list_view.svg)](https://pub.dev/packages/group_list_view)
 
