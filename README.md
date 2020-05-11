@@ -1,8 +1,15 @@
 # GroupListView package for Flutter. (Developers Preview)
 
-A List with Headers like iOS UITableView section.
+[![pub package](https://img.shields.io/pub/v/group_list_view.svg)](https://pub.dev/packages/group_list_view)
+
+A ListView that allows you to group list items and support headers like iOS UITableView section.
 
 <img src="https://raw.githubusercontent.com/Daniel-Ioannou/flutter_group_list_view/master/assets/ReadMe%20%20Screenshot.png" width="300"> 
+
+### Features
+* List Items can be grouped and support headers for each group.
+* All fields from `ListView.builder` constructor available.
+
 
 ## Getting Started
 
@@ -38,3 +45,15 @@ import 'package:group_list_view/group_list_view.dart';
     },
   ),
 ```
+
+### Parameters:
+* `sectionsCount`: The number of sections in the ListView. (required)
+* `countOfItemInSection`. Function which returns the number of items(rows) in a specified section. (required)
+* `itemBuilder`: Function which returns an Widget which defines the item at the specified `IndexPath`. `itemBuilder` provides the current section and index. (required)
+```Dart
+  Widget _itemBuilder(BuildContext context, IndexPath index) {
+     return Text('${_elements[index.section][index.index]}');
+  }
+```  
+* `groupHeaderBuilder`: Function which returns an Widget which defines the section header for each group. (required) 
+

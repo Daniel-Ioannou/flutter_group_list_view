@@ -1,4 +1,4 @@
 library group_list_view;
 
-export 'index_path.dart';
-export 'list_view.dart';
+export 'src/index_path.dart';
+export 'src/list_view.dart';
