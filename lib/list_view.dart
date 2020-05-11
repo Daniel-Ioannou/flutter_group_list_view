@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'index_path.dart';
 
-typedef ItemWidgetBuilder = Widget Function(BuildContext context, IndexPath index);
-typedef SectionWidgetBuilder = Widget Function(BuildContext context, int section);
+typedef ItemWidgetBuilder = Widget Function(
+    BuildContext context, IndexPath index);
+typedef SectionWidgetBuilder = Widget Function(
+    BuildContext context, int section);
 
 class GroupListView extends StatefulWidget {
   final int sectionsCount;
@@ -98,7 +100,7 @@ class _GroupListViewState extends State<GroupListView> {
 
       int rows = widget.countOfItemInSection(section);
       for (int index = 0; index < rows; index++) {
-        _indexToIndexPathList.add(IndexPath(section: section, index: j));
+        _indexToIndexPathList.add(IndexPath(section: section, index: index));
       }
     }
   }
