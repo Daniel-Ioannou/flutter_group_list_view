@@ -1,3 +1,7 @@
+## [1.0.3] - 12 May 2020
+
+* Improve build performance.
+
 ## [1.0.2] - 10 May 2020
 
 * Update documentation.
