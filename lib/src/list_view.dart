@@ -237,13 +237,17 @@ class GroupListView extends StatefulWidget {
 }
 
 class _GroupListViewState extends State<GroupListView> {
+  List<IndexPath> _indexToIndexPathList;
+
   @override
   void initState() {
+    _indexToIndexPathList = List();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    _calculateIndexPath();
     return ListView.builder(
       scrollDirection: widget.scrollDirection,
       reverse: widget.reverse,
@@ -261,12 +265,24 @@ class _GroupListViewState extends State<GroupListView> {
       dragStartBehavior: widget.dragStartBehavior,
       itemCount: _itemCount,
       itemBuilder: (BuildContext context, int index) {
-        IndexPath indexPath = _getIndexPath(index);
+        IndexPath indexPath = _indexToIndexPathList[index];
         if (indexPath.index != null)
           return widget.itemBuilder(context, indexPath);
         return widget.groupHeaderBuilder(context, indexPath.section);
       },
     );
+  }
+
+  void _calculateIndexPath() {
+    _indexToIndexPathList = List();
+    for (int section = 0; section < widget.sectionsCount; section++) {
+      _indexToIndexPathList.add(IndexPath(section: section, index: null));
+
+      int rows = widget.countOfItemInSection(section);
+      for (int index = 0; index < rows; index++) {
+        _indexToIndexPathList.add(IndexPath(section: section, index: index));
+      }
+    }
   }
 
   int get _itemCount {
@@ -275,24 +291,5 @@ class _GroupListViewState extends State<GroupListView> {
       itemCount += widget.countOfItemInSection(index);
     }
     return itemCount + widget.sectionsCount;
-  }
-
-  IndexPath _getIndexPath(int index) {
-    if (index == 0) {
-      return IndexPath(section: 0);
-    }
-    for (var section = 0; section < widget.sectionsCount; section++) {
-      int used = 1;
-      for (var i = section - 1; i >= 0; i--) {
-        used += widget.countOfItemInSection(i) + 1;
-      }
-
-      if (index == used - 1) return IndexPath(section: section);
-
-      if ((widget.countOfItemInSection(section) + used) > index) {
-        return IndexPath(section: section, index: index - used);
-      }
-    }
-    return null;
   }
 }
