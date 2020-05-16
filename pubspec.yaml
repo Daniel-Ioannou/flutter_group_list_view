@@ -5,7 +5,7 @@ homepage: https://github.com/Daniel-Ioannou
 repository: https://github.com/Daniel-Ioannou/flutter_group_list_view.git
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:

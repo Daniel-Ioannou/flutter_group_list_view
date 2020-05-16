@@ -8,7 +8,13 @@ Map<String, List> _elements = {
   'Team A': ['Klay Lewis', 'Ehsan Woodard', 'River Bains'],
   'Team B': ['Toyah Downs', 'Tyla Kane'],
   'Team C': ['Marcus Romero', 'Farrah Parkes', 'Fay Lawson', 'Asif Mckay'],
-  'Team D': ['Casey Zuniga', 'Ayisha Burn', 'Josie Hayden', 'Kenan Walls', 'Mario Powers'],
+  'Team D': [
+    'Casey Zuniga',
+    'Ayisha Burn',
+    'Josie Hayden',
+    'Kenan Walls',
+    'Mario Powers'
+  ],
   'Team Q': ['Toyah Downs', 'Tyla Kane', 'Toyah Downs'],
 };
 
@@ -39,6 +45,7 @@ class MyApp extends StatelessWidget {
               ),
             );
           },
+          separatorBuilder: (context, index) => SizedBox(height: 10),
         ),
       ),
     );
@@ -47,7 +54,7 @@ class MyApp extends StatelessWidget {
   Widget _itemBuilder(BuildContext context, IndexPath index) {
     String user = _elements.values.toList()[index.section][index.index];
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Card(
         elevation: 8,
         child: ListTile(

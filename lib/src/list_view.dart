@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'index_path.dart';
+import 'list_item.dart';
+import 'list_item_type.dart';
 
 /// Signature for a function that creates a widget for a given [IndexPath], in a
 /// list.
@@ -35,6 +37,11 @@ class GroupListView extends StatefulWidget {
 
   ///Function which returns the number of items(rows) in a specified section.
   final int Function(int section) countOfItemInSection;
+
+  ///Function which returns an Widget which defines the separator at the specified IndexPath.
+  ///
+  ///[separatorBuilder] provides the current section and index.
+  final ItemWidgetBuilder separatorBuilder;
 
   //Fields from ListView.builder constructor
 
@@ -216,6 +223,7 @@ class GroupListView extends StatefulWidget {
     @required this.sectionsCount,
     @required this.groupHeaderBuilder,
     @required this.countOfItemInSection,
+    this.separatorBuilder,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.controller,
@@ -237,7 +245,7 @@ class GroupListView extends StatefulWidget {
 }
 
 class _GroupListViewState extends State<GroupListView> {
-  List<IndexPath> _indexToIndexPathList;
+  List<ListItem> _indexToIndexPathList;
 
   @override
   void initState() {
@@ -263,33 +271,51 @@ class _GroupListViewState extends State<GroupListView> {
       cacheExtent: widget.cacheExtent,
       semanticChildCount: widget.semanticChildCount,
       dragStartBehavior: widget.dragStartBehavior,
-      itemCount: _itemCount,
-      itemBuilder: (BuildContext context, int index) {
-        IndexPath indexPath = _indexToIndexPathList[index];
-        if (indexPath.index != null)
-          return widget.itemBuilder(context, indexPath);
-        return widget.groupHeaderBuilder(context, indexPath.section);
-      },
+      itemCount: _indexToIndexPathList.length,
+      itemBuilder: _itemBuilder,
     );
   }
 
   void _calculateIndexPath() {
     _indexToIndexPathList = List();
+    ListItem listItem;
     for (int section = 0; section < widget.sectionsCount; section++) {
-      _indexToIndexPathList.add(IndexPath(section: section, index: null));
+      //Add section
+      listItem = ListItem(
+        indexPath: IndexPath(section: section),
+        type: ListItemType.section,
+      );
+      _indexToIndexPathList.add(listItem);
 
       int rows = widget.countOfItemInSection(section);
       for (int index = 0; index < rows; index++) {
-        _indexToIndexPathList.add(IndexPath(section: section, index: index));
+        //Add item
+        listItem = ListItem(
+          indexPath: IndexPath(section: section, index: index),
+          type: ListItemType.item,
+        );
+        _indexToIndexPathList.add(listItem);
+
+        //Add separator
+        if (widget.separatorBuilder != null) {
+          listItem = ListItem(
+            indexPath: IndexPath(section: section, index: index),
+            type: ListItemType.separator,
+          );
+          _indexToIndexPathList.add(listItem);
+        }
       }
     }
   }
 
-  int get _itemCount {
-    int itemCount = 0;
-    for (var index = 0; index < widget.sectionsCount; index++) {
-      itemCount += widget.countOfItemInSection(index);
+  Widget _itemBuilder(BuildContext context, int index) {
+    ListItem listItem = _indexToIndexPathList[index];
+    IndexPath indexPath = listItem.indexPath;
+    if (listItem.type.isSection) {
+      return widget.groupHeaderBuilder(context, indexPath.section);
+    } else if (listItem.type.isSeparator) {
+      return widget.separatorBuilder(context, indexPath);
     }
-    return itemCount + widget.sectionsCount;
+    return widget.itemBuilder(context, indexPath);
   }
 }
