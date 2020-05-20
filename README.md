@@ -7,16 +7,16 @@ A ListView that allows you to group list items and support headers like iOS UITa
 <img src="https://raw.githubusercontent.com/Daniel-Ioannou/flutter_group_list_view/master/assets/ReadMe%20%20Screenshot.png" width="300"> 
 
 ### Features
-* List Items can be grouped and support headers for each group.
+* List Items can be grouped.
+* Support headers for each group.
 * All fields from `ListView.builder` constructor available.
-
 
 ## Getting Started
 
  Add the package to your pubspec.yaml:
 
  ```yaml
- group_list_view: ^1.0.3
+ group_list_view: ^1.0.4
  ```
  
  In your dart file, import the library:
@@ -28,12 +28,22 @@ import 'package:group_list_view/group_list_view.dart';
  Instead of using a `ListView` create a `GroupListView` Widget:
  
  ```Dart
+  Map<String, List> _elements = {
+    'Team A': ['Klay Lewis', 'Ehsan Woodard', 'River Bains'],
+    'Team B': ['Toyah Downs', 'Tyla Kane'],
+  };
+  
   GroupListView(
     sectionsCount: _elements.keys.toList().length,
     countOfItemInSection: (int section) {
       return _elements.values.toList()[section].length;
     },
-    itemBuilder: _itemBuilder,
+    itemBuilder: (BuildContext context, IndexPath index) {
+      return Text(
+        _elements.values.toList()[index.section][index.index],
+        style: TextStyle(color: Colors.white, fontSize: 18),
+      );
+    },
     groupHeaderBuilder: (BuildContext context, int section) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
@@ -43,7 +53,8 @@ import 'package:group_list_view/group_list_view.dart';
         ),
       );
     },
-  ),
+    separatorBuilder: (context, index) => SizedBox(height: 10),
+  );
 ```
 
 ### Parameters:
@@ -56,3 +67,6 @@ import 'package:group_list_view/group_list_view.dart';
   }
 ```  
 * `groupHeaderBuilder`: Function which returns an Widget which defines the section header for each group. (required)
+* `separatorBuilder`: Function which returns an Widget which defines the divider/separator at the specified IndexPath.
+
+The `itemBuilder` and `separatorBuilder` callbacks should actually create widget instances when called. 
