@@ -1,3 +1,13 @@
+## [1.0.4] - 20 May 2020
+
+* Support `separatorBuilder`
+
+```Dart
+Widget separatorBuilder(BuildContext context, IndexPath index) {
+   return SizedBox(height: 10);
+}
+```  
+
 ## [1.0.3] - 12 May 2020
 
 * Improve build performance.

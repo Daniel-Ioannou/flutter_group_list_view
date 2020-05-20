@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
               ),
             );
           },
+          separatorBuilder: (context, index) => SizedBox(height: 10),
         ),
       ),
     );
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
   Widget _itemBuilder(BuildContext context, IndexPath index) {
     String user = _elements.values.toList()[index.section][index.index];
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Card(
         elevation: 8,
         child: ListTile(
