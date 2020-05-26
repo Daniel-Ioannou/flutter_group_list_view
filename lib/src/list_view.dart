@@ -241,7 +241,11 @@ class GroupListView extends StatefulWidget {
     this.cacheExtent,
     this.semanticChildCount,
     this.dragStartBehavior = DragStartBehavior.start,
-  }) : super(key: key);
+  })  : assert(itemBuilder != null),
+        assert(sectionsCount != null),
+        assert(groupHeaderBuilder != null),
+        assert(countOfItemInSection != null),
+        super(key: key);
 
   @override
   _GroupListViewState createState() => _GroupListViewState();
