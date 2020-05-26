@@ -40,6 +40,9 @@ class GroupListView extends StatefulWidget {
 
   ///Function which returns an Widget which defines the separator at the specified IndexPath.
   ///
+  /// Separators only appear between list items: separator 0 appears after item
+  /// 0 and the last separator appears after the last item.
+  ///
   ///[separatorBuilder] provides the current section and index.
   final ItemWidgetBuilder separatorBuilder;
 
