@@ -256,7 +256,7 @@ class _GroupListViewState extends State<GroupListView> {
 
   @override
   void initState() {
-    _indexToIndexPathList = List();
+    _indexToIndexPathList = [];
     super.initState();
   }
 
@@ -284,7 +284,7 @@ class _GroupListViewState extends State<GroupListView> {
   }
 
   void _calculateIndexPath() {
-    _indexToIndexPathList = List();
+    _indexToIndexPathList = [];
     ListItem listItem;
     for (int section = 0; section < widget.sectionsCount; section++) {
       //Add section
@@ -294,7 +294,7 @@ class _GroupListViewState extends State<GroupListView> {
       );
       _indexToIndexPathList.add(listItem);
 
-      int rows = widget.countOfItemInSection(section);
+      final int rows = widget.countOfItemInSection(section);
       for (int index = 0; index < rows; index++) {
         //Add item
         listItem = ListItem(
@@ -316,8 +316,8 @@ class _GroupListViewState extends State<GroupListView> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    ListItem listItem = _indexToIndexPathList[index];
-    IndexPath indexPath = listItem.indexPath;
+    final ListItem listItem = _indexToIndexPathList[index];
+    final IndexPath indexPath = listItem.indexPath;
     if (listItem.type.isSection) {
       return widget.groupHeaderBuilder(context, indexPath.section);
     } else if (listItem.type.isSeparator) {
