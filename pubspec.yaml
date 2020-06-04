@@ -4,7 +4,7 @@ description: Flutter package for ListView that allows you to group list items an
 homepage: https://github.com/Daniel-Ioannou
 repository: https://github.com/Daniel-Ioannou/flutter_group_list_view.git
 
-version: 1.0.4
+version: 1.0.5
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
