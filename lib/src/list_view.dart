@@ -40,6 +40,9 @@ class GroupListView extends StatefulWidget {
 
   ///Function which returns an Widget which defines the separator at the specified IndexPath.
   ///
+  /// Separators only appear between list items: separator 0 appears after item
+  /// 0 and the last separator appears after the last item.
+  ///
   ///[separatorBuilder] provides the current section and index.
   final ItemWidgetBuilder separatorBuilder;
 
@@ -238,7 +241,11 @@ class GroupListView extends StatefulWidget {
     this.cacheExtent,
     this.semanticChildCount,
     this.dragStartBehavior = DragStartBehavior.start,
-  }) : super(key: key);
+  })  : assert(itemBuilder != null),
+        assert(sectionsCount != null),
+        assert(groupHeaderBuilder != null),
+        assert(countOfItemInSection != null),
+        super(key: key);
 
   @override
   _GroupListViewState createState() => _GroupListViewState();
@@ -249,7 +256,7 @@ class _GroupListViewState extends State<GroupListView> {
 
   @override
   void initState() {
-    _indexToIndexPathList = List();
+    _indexToIndexPathList = [];
     super.initState();
   }
 
@@ -277,7 +284,7 @@ class _GroupListViewState extends State<GroupListView> {
   }
 
   void _calculateIndexPath() {
-    _indexToIndexPathList = List();
+    _indexToIndexPathList = [];
     ListItem listItem;
     for (int section = 0; section < widget.sectionsCount; section++) {
       //Add section
@@ -287,7 +294,7 @@ class _GroupListViewState extends State<GroupListView> {
       );
       _indexToIndexPathList.add(listItem);
 
-      int rows = widget.countOfItemInSection(section);
+      final int rows = widget.countOfItemInSection(section);
       for (int index = 0; index < rows; index++) {
         //Add item
         listItem = ListItem(
@@ -309,8 +316,8 @@ class _GroupListViewState extends State<GroupListView> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    ListItem listItem = _indexToIndexPathList[index];
-    IndexPath indexPath = listItem.indexPath;
+    final ListItem listItem = _indexToIndexPathList[index];
+    final IndexPath indexPath = listItem.indexPath;
     if (listItem.type.isSection) {
       return widget.groupHeaderBuilder(context, indexPath.section);
     } else if (listItem.type.isSeparator) {

@@ -7,7 +7,7 @@ GroupListView is a List with Headers like iOS UITableView section.
  Add the package to your pubspec.yaml:
 
  ```yaml
- group_list_view: ^1.0.4
+ group_list_view: ^1.0.5
  ```
  
  In your dart file, import the library:
