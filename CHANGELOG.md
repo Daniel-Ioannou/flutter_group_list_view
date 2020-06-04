@@ -1,3 +1,9 @@
+## [1.0.5] - 04 Jun 2020
+
+* Add assert for all the required parameters.
+* Update documentation.
+* Setting up Lint Rules.
+
 ## [1.0.4] - 20 May 2020
 
 * Support `separatorBuilder`
