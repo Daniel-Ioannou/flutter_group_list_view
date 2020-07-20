@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
             );
           },
           separatorBuilder: (context, index) => SizedBox(height: 10),
+          sectionSeparatorBuilder: (context, section) => SizedBox(height: 10),
         ),
       ),
     );
