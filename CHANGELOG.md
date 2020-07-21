@@ -1,3 +1,15 @@
+## [1.0.6] - 21 Jul 2020
+
+* Support `sectionSeparatorBuilder` 
+  
+  Separators only appear between sections: separator 0 appears after section 0 and the last separator appears after the last section.
+
+```Dart
+Widget sectionSeparatorBuilder(BuildContext context, int section) {
+   return SizedBox(height: 10);
+}
+```  
+
 ## [1.0.5] - 04 Jun 2020
 
 * Add assert for all the required parameters.
@@ -6,7 +18,9 @@
 
 ## [1.0.4] - 20 May 2020
 
-* Support `separatorBuilder`
+* Support `separatorBuilder`  
+  
+  Separators only appear between list items: separator 0 appears after item 0 and the last separator appears after the last item.
 
 ```Dart
 Widget separatorBuilder(BuildContext context, IndexPath index) {
