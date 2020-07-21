@@ -46,6 +46,14 @@ class GroupListView extends StatefulWidget {
   ///[separatorBuilder] provides the current section and index.
   final ItemWidgetBuilder separatorBuilder;
 
+  ///Function which returns an Widget which defines the separator at the specified section.
+  ///
+  /// Separators only appear between sections: separator 0 appears after section
+  /// 0 and the last separator appears after the last section.
+  ///
+  ///[sectionSeparatorBuilder] provides the current section.
+  final SectionWidgetBuilder sectionSeparatorBuilder;
+
   //Fields from ListView.builder constructor
 
   /// The axis along which the scroll view scrolls.
@@ -227,6 +235,7 @@ class GroupListView extends StatefulWidget {
     @required this.groupHeaderBuilder,
     @required this.countOfItemInSection,
     this.separatorBuilder,
+    this.sectionSeparatorBuilder,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.controller,
@@ -307,10 +316,19 @@ class _GroupListViewState extends State<GroupListView> {
         if (widget.separatorBuilder != null) {
           listItem = ListItem(
             indexPath: IndexPath(section: section, index: index),
-            type: ListItemType.separator,
+            type: ListItemType.itemSeparator,
           );
           _indexToIndexPathList.add(listItem);
         }
+      }
+
+      //Add section separator
+      if (widget.sectionSeparatorBuilder != null) {
+        listItem = ListItem(
+          indexPath: IndexPath(section: section),
+          type: ListItemType.itemSeparator,
+        );
+        _indexToIndexPathList.add(listItem);
       }
     }
   }
@@ -320,7 +338,9 @@ class _GroupListViewState extends State<GroupListView> {
     final IndexPath indexPath = listItem.indexPath;
     if (listItem.type.isSection) {
       return widget.groupHeaderBuilder(context, indexPath.section);
-    } else if (listItem.type.isSeparator) {
+    } else if (listItem.type.isSectionSeparator) {
+      return widget.sectionSeparatorBuilder(context, indexPath.section);
+    } else if (listItem.type.isItemSeparator) {
       return widget.separatorBuilder(context, indexPath);
     }
     return widget.itemBuilder(context, indexPath);
