@@ -1,11 +1,13 @@
+import 'package:flutter/cupertino.dart';
+
 class IndexPath {
   /// The the number of the section.
   final int section;
 
   /// The the number of the row in the [section].
-  final int index;
+  final int? index;
 
   /// The Class that contains the [section] number
   /// and the [index] number in this section.
-  IndexPath({this.section, this.index});
+  IndexPath({required this.section, this.index});
 }
