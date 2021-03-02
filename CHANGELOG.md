@@ -1,3 +1,7 @@
+## [1.1.0] - 02 Mar 2021
+
+* Migrating to null safety 
+
 ## [1.0.6] - 21 Jul 2020
 
 * Support `sectionSeparatorBuilder` 
