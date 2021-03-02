@@ -44,7 +44,7 @@ class GroupListView extends StatefulWidget {
   /// 0 and the last separator appears after the last item.
   ///
   ///[separatorBuilder] provides the current section and index.
-  final ItemWidgetBuilder separatorBuilder;
+  final ItemWidgetBuilder? separatorBuilder;
 
   ///Function which returns an Widget which defines the separator at the specified section.
   ///
@@ -52,7 +52,7 @@ class GroupListView extends StatefulWidget {
   /// 0 and the last separator appears after the last section.
   ///
   ///[sectionSeparatorBuilder] provides the current section.
-  final SectionWidgetBuilder sectionSeparatorBuilder;
+  final SectionWidgetBuilder? sectionSeparatorBuilder;
 
   //Fields from ListView.builder constructor
 
@@ -87,7 +87,7 @@ class GroupListView extends StatefulWidget {
   /// [ScrollController.keepScrollOffset]). It can be used to read the current
   /// scroll position (see [ScrollController.offset]), or change it (see
   /// [ScrollController.animateTo]).
-  final ScrollController controller;
+  final ScrollController? controller;
 
   /// Whether this is the primary scroll view associated with the parent
   /// [PrimaryScrollController].
@@ -101,7 +101,7 @@ class GroupListView extends StatefulWidget {
   ///
   /// Defaults to true when [scrollDirection] is [Axis.vertical] and
   /// [controller] is null.
-  final bool primary;
+  final bool? primary;
 
   /// How the scroll view should respond to user input.
   ///
@@ -137,7 +137,7 @@ class GroupListView extends StatefulWidget {
   /// dynamically, which can be relatively expensive, and it would be
   /// inefficient to speculatively create this object each frame to see if the
   /// physics should be updated.)
-  final ScrollPhysics physics;
+  final ScrollPhysics? physics;
 
   /// Whether the extent of the scroll view in the [scrollDirection] should be
   /// determined by the contents being viewed.
@@ -156,7 +156,7 @@ class GroupListView extends StatefulWidget {
   final bool shrinkWrap;
 
   /// The amount of space by which to inset the children.
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
   /// If non-null, forces the children to have the given extent in the scroll
   /// direction.
@@ -165,7 +165,7 @@ class GroupListView extends StatefulWidget {
   /// determine their own extent because the scrolling machinery can make use of
   /// the foreknowledge of the children's extent to save work, for example when
   /// the scroll position changes drastically.
-  final double itemExtent;
+  final double? itemExtent;
 
   /// Whether to wrap each child in an [AutomaticKeepAlive].
   ///
@@ -208,7 +208,7 @@ class GroupListView extends StatefulWidget {
   final bool addSemanticIndexes;
 
   /// {@macro flutter.rendering.viewport.cacheExtent}
-  final double cacheExtent;
+  final double? cacheExtent;
 
   /// The number of children that will contribute semantic information.
   ///
@@ -223,17 +223,17 @@ class GroupListView extends StatefulWidget {
   /// See also:
   ///
   ///  * [SemanticsConfiguration.scrollChildCount], the corresponding semantics property.
-  final int semanticChildCount;
+  final int? semanticChildCount;
 
   /// {@macro flutter.widgets.scrollable.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
   const GroupListView({
-    Key key,
-    @required this.itemBuilder,
-    @required this.sectionsCount,
-    @required this.groupHeaderBuilder,
-    @required this.countOfItemInSection,
+    Key? key,
+    required this.itemBuilder,
+    required this.sectionsCount,
+    required this.groupHeaderBuilder,
+    required this.countOfItemInSection,
     this.separatorBuilder,
     this.sectionSeparatorBuilder,
     this.scrollDirection = Axis.vertical,
@@ -250,18 +250,14 @@ class GroupListView extends StatefulWidget {
     this.cacheExtent,
     this.semanticChildCount,
     this.dragStartBehavior = DragStartBehavior.start,
-  })  : assert(itemBuilder != null),
-        assert(sectionsCount != null),
-        assert(groupHeaderBuilder != null),
-        assert(countOfItemInSection != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   _GroupListViewState createState() => _GroupListViewState();
 }
 
 class _GroupListViewState extends State<GroupListView> {
-  List<ListItem> _indexToIndexPathList;
+  late List<ListItem> _indexToIndexPathList;
 
   @override
   void initState() {
@@ -339,9 +335,9 @@ class _GroupListViewState extends State<GroupListView> {
     if (listItem.type.isSection) {
       return widget.groupHeaderBuilder(context, indexPath.section);
     } else if (listItem.type.isSectionSeparator) {
-      return widget.sectionSeparatorBuilder(context, indexPath.section);
+      return widget.sectionSeparatorBuilder!(context, indexPath.section);
     } else if (listItem.type.isItemSeparator) {
-      return widget.separatorBuilder(context, indexPath);
+      return widget.separatorBuilder!(context, indexPath);
     }
     return widget.itemBuilder(context, indexPath);
   }

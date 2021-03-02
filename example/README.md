@@ -1,13 +1,22 @@
-# Example application for GroupListView.
+# GroupListView package for Flutter.
 
-GroupListView is a List with Headers like iOS UITableView section.
+[![pub package](https://img.shields.io/pub/v/group_list_view.svg)](https://pub.dev/packages/group_list_view)
+
+A ListView that allows you to group list items and support headers like iOS UITableView section.
+
+<img src="https://raw.githubusercontent.com/Daniel-Ioannou/flutter_group_list_view/master/assets/ReadMe%20%20Screenshot.png" width="300"> 
+
+### Features
+* List Items can be grouped.
+* Support headers for each group.
+* All fields from `ListView.builder` constructor available.
 
 ## Getting Started
 
  Add the package to your pubspec.yaml:
 
  ```yaml
- group_list_view: ^1.0.6
+ group_list_view: ^1.1.0
  ```
  
  In your dart file, import the library:
@@ -48,3 +57,20 @@ import 'package:group_list_view/group_list_view.dart';
     sectionSeparatorBuilder: (context, section) => SizedBox(height: 10),
   );
 ```
+
+### Parameters:
+* `sectionsCount`: The number of sections in the ListView. (required)
+* `countOfItemInSection`. Function which returns the number of items(rows) in a specified section. (required)
+* `itemBuilder`: Function which returns an Widget which defines the item at the specified `IndexPath`. `itemBuilder` provides the current section and index. (required)
+```Dart
+  Widget _itemBuilder(BuildContext context, IndexPath index) {
+     return Text('${_elements[index.section][index.index]}');
+  }
+```  
+* `groupHeaderBuilder`: Function which returns an Widget which defines the section header for each group. (required)
+* `separatorBuilder`: Function which returns an Widget which defines the divider/separator at the specified IndexPath.
+
+  The `itemBuilder` and `separatorBuilder` callbacks should actually create widget instances when called. 
+
+## Contributions
+Contributions of any kind are more than welcome! Feel free to fork and improve country_code_picker in any way you want, make a pull request, or open an issue.

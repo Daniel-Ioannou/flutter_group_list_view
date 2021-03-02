@@ -8,7 +8,13 @@ Map<String, List> _elements = {
   'Team A': ['Klay Lewis', 'Ehsan Woodard', 'River Bains'],
   'Team B': ['Toyah Downs', 'Tyla Kane'],
   'Team C': ['Marcus Romero', 'Farrah Parkes', 'Fay Lawson', 'Asif Mckay'],
-  'Team D': ['Casey Zuniga', 'Ayisha Burn', 'Josie Hayden', 'Kenan Walls', 'Mario Powers'],
+  'Team D': [
+    'Casey Zuniga',
+    'Ayisha Burn',
+    'Josie Hayden',
+    'Kenan Walls',
+    'Mario Powers'
+  ],
   'Team Q': ['Toyah Downs', 'Tyla Kane', 'Toyah Downs'],
 };
 
