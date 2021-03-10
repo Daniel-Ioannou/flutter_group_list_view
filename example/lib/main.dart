@@ -88,6 +88,6 @@ class MyApp extends StatelessWidget {
 
   Color _getAvatarColor(String user) {
     return AppColors
-        .avatarColors[(user?.hashCode ?? 1) % AppColors.avatarColors.length];
+        .avatarColors[user.hashCode % AppColors.avatarColors.length];
   }
 }

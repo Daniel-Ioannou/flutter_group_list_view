@@ -16,7 +16,7 @@ A ListView that allows you to group list items and support headers like iOS UITa
  Add the package to your pubspec.yaml:
 
  ```yaml
- group_list_view: ^1.1.0
+ group_list_view: ^1.1.1
  ```
  
  In your dart file, import the library:

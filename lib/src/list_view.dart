@@ -294,7 +294,7 @@ class _GroupListViewState extends State<GroupListView> {
     for (int section = 0; section < widget.sectionsCount; section++) {
       //Add section
       listItem = ListItem(
-        indexPath: IndexPath(section: section),
+        indexPath: IndexPath(section: section, index: 0),
         type: ListItemType.section,
       );
       _indexToIndexPathList.add(listItem);
@@ -321,8 +321,8 @@ class _GroupListViewState extends State<GroupListView> {
       //Add section separator
       if (widget.sectionSeparatorBuilder != null) {
         listItem = ListItem(
-          indexPath: IndexPath(section: section),
-          type: ListItemType.itemSeparator,
+          indexPath: IndexPath(section: section, index: 0),
+          type: ListItemType.sectionSeparator,
         );
         _indexToIndexPathList.add(listItem);
       }
