@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'index_path.dart';
 import 'list_item_type.dart';
 
