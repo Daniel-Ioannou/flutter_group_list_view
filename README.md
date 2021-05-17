@@ -73,4 +73,4 @@ import 'package:group_list_view/group_list_view.dart';
   The `itemBuilder` and `separatorBuilder` callbacks should actually create widget instances when called. 
 
 ## Contributions
-Contributions of any kind are more than welcome! Feel free to fork and improve country_code_picker in any way you want, make a pull request, or open an issue.
+Contributions of any kind are more than welcome! Feel free to fork and improve flutter_group_list_view in any way you want, make a pull request, or open an issue.
